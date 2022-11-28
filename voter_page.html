@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="voter"></div>
+</body>
+</html>
+<script>
+
+    let title = localStorage.getItem("Title")
+    // let choices = localStorage.getItem(title)
+    // console.log(choices)
+    const voter_page = document.getElementById("voter")
+    const header_container = document.createElement("div");
+    header_container.className = "header_container"
+    voter_page.appendChild(header_container)
+
+    const logo_div = document.createElement("div");
+    logo_div.className = "logo_div"
+
+    const logo_image = document.createElement("img");
+    logo_image.className = "logo_image"
+    logo_image.src = "https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV"
+   
+    const vote_header_div = document.createElement("div")
+    vote_header_div.className = "voter_container"
+    const vote_header = document.createElement("div")
+    vote_header.className = "voter_header" 
+    vote_header.innerHTML = "VOTER"
+    header_container.appendChild(logo_div)
+    logo_div.appendChild(logo_image)
+    header_container.appendChild(vote_header_div)
+    vote_header_div.appendChild(vote_header)
+
+    const poll_container = document.createElement("div")
+    poll_container.className = "poll_container"
+    const poll_display = document.createElement("div")
+    poll_display.className = "poll_display"
+    poll_display.innerHTML= title;
+    poll_container.onclick = register_page;
+
+
+voter_page.appendChild(poll_container)
+poll_container.appendChild(poll_display)
+
+function register_page(){
+    const register = "./register_page.html"
+    window.location = register
+}
+</script>

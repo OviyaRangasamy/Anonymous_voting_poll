@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="admin"></div>
+</body>
+
+</html>
+<script>
+    const access = document.getElementById("admin");
+    const external_container = document.createElement("div");
+    external_container.className = "external_container"
+    access.appendChild(external_container)
+
+    const header_container = document.createElement("div");
+    header_container.className = "admin_header";
+
+    const logo_div = document.createElement("div");
+    logo_div.className = "logo_div"
+
+    const logo_image = document.createElement("img");
+    logo_image.className = "logo_image"
+    logo_image.src = "https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV"
+
+    const profile_container = document.createElement("div")
+    profile_container.className = "profile_container"
+
+    const admin_profile = document.createElement("button")
+    admin_profile.className = "admin_profile"
+    admin_profile.innerHTML = "Admin Profile"
+
+    external_container.appendChild(header_container)
+    header_container.appendChild(logo_div)
+    logo_div.appendChild(logo_image)
+    header_container.appendChild(profile_container)
+    profile_container.appendChild(admin_profile)
+
+    const internal_container = document.createElement("div");
+    internal_container.className = "internal"
+    const create = document.createElement("div")
+    create.className = "create_container"
+    create.innerHTML = "Create Poll"
+    create.onclick = create_poll_call
+    const view = document.createElement("div")
+    view.className = "create_container"
+    view.innerHTML = "View Poll"
+    view.onclick = function(){view_poll_call()}
+
+    external_container.appendChild(internal_container)
+    internal_container.appendChild(create)
+    internal_container.appendChild(view)
+
+
+    function create_poll_call() {
+        const create_page = "./create_poll.html"
+        window.location = create_page
+    }
+
+   
+
+
+    function view_poll_call() {
+        const view_page = `./view_poll.html`
+        window.location = view_page
+      
+    }
+
+
+
+</script>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="create_poll"></div>
+</body>
+
+</html>
+
+<script>
+    const createpoll = document.getElementById("create_poll");
+    const header_container = document.createElement("div");
+    header_container.className = "header_container"
+    createpoll.appendChild(header_container)
+
+    const logo_div = document.createElement("div");
+    logo_div.className = "logo_div"
+
+    const logo_image = document.createElement("img");
+    logo_image.className = "logo_image"
+    logo_image.src = "https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV"
+
+    const create_header = document.createElement("div");
+    create_header.className = "create_header";
+    create_header.innerHTML = "Create"
+
+    const profile_container = document.createElement("div")
+    profile_container.className = "profile_container"
+
+    const admin_profile = document.createElement("button")
+    admin_profile.className = "admin_profile"
+    admin_profile.innerHTML = "Admin Profile"
+
+    header_container.appendChild(logo_div)
+    logo_div.appendChild(logo_image)
+    header_container.appendChild(create_header);
+    header_container.appendChild(profile_container)
+    profile_container.appendChild(admin_profile)
+
+
+    let poll_title_array = []
+    let choice1 = null, choice2 = null, choice3 = null, choice4 = null, choice5 = null
+
+    const external_create = document.createElement("div")
+    external_create.className = "external_create"
+    const poll_name = document.createElement("div")
+    poll_name.className = "poll_name"
+    const enter_name = document.createElement("div")
+    enter_name.className = "enter_name"
+    enter_name.innerHTML = "Enter Poll Title"
+    const type_name = document.createElement("input")
+    type_name.setAttribute("id", "title")
+    type_name.type = "text";
+    type_name.required;
+    type_name.className = "type_name"
+    // let poll_title = type_name.value;
+
+
+    const submit_title = document.createElement("button")
+    submit_title.type = "submit"
+    submit_title.innerHTML = "Save"
+    submit_title.className = "submit_name"
+    submit_title.onclick = function () { save_title() }
+
+    poll_name.appendChild(enter_name)
+    poll_name.appendChild(type_name)
+    poll_name.appendChild(submit_title)
+    external_create.appendChild(poll_name)
+    createpoll.appendChild(external_create)
+
+
+    let len = 2
+    let count = 0
+    const ext_div = document.createElement("div")
+    ext_div.className = "option_container"
+    function option_count() {
+
+
+        for (let i = 0; i < len; i++) {
+            const option_display = document.createElement("div")
+            option_display.setAttribute("id", "opt")
+            option_display.className = "option"
+            const option_no = document.createElement("input")
+            option_no.setAttribute("id", `choice_value${count}`)
+            option_no.placeholder = `Option ${count + 1}`
+            option_no.className = "option_name"
+            option_no.required;
+            option_display.appendChild(option_no)
+            ext_div.appendChild(option_display)
+            count++;
+        }
+
+    }
+    external_create.appendChild(ext_div)
+
+    const choice_details = document.createElement("div")
+    choice_details.className = "choice_details"
+    external_create.appendChild(choice_details)
+    function add_btn() {
+        const add_div = document.createElement("div")
+        const add_button = document.createElement("button")
+        add_button.setAttribute("id", "add")
+        add_button.innerText = "add";
+        add_button.onclick = add_option;
+        add_div.appendChild(add_button)
+        choice_details.appendChild(add_div)
+    }
+
+    function remove_btn() {
+        const rem_div = document.createElement("div")
+        const rem_button = document.createElement("button")
+        rem_button.setAttribute("id", "delete")
+        rem_button.innerText = "delete";
+        rem_button.onclick = remove_option;
+        rem_div.appendChild(rem_button)
+        choice_details.appendChild(rem_div)
+    }
+
+    function save_options() {
+        let save_div = document.createElement("div")
+        save_div.className = "save_div"
+        let save = document.createElement("button")
+        save.setAttribute("id", "save_value")
+        save.innerHTML = "Save"
+        save.onclick = function () { save_values() };
+        save_div.appendChild(save)
+        external_create.appendChild(save_div)
+    }
+
+    function create_button() {
+        const create_div = document.createElement("div")
+        create_div.className = "save_div"
+        const create_button = document.createElement("button")
+        create_button.innerHTML = "CREATE"
+        create_button.setAttribute("id", "create_button")
+        create_button.onclick = function () { creation_phase() }
+        create_div.appendChild(create_button)
+        external_create.appendChild(create_div)
+    }
+
+    option_count()
+    add_btn()
+    remove_btn()
+    save_options()
+    create_button()
+
+    function add_option() {
+
+        if (count > 4) {
+            let adding = document.getElementById("add")
+            adding.disabled = true;
+        }
+        else {
+            let del = document.getElementById("delete")
+            del.disabled = false;
+            let adding = document.getElementById("add")
+            len = 1;
+            option_count();
+            console.log(count)
+
+        }
+
+
+    }
+
+    function remove_option() {
+        let del = document.getElementById("delete")
+        if (count > 2) {
+            del.disabled = false;
+            let adding = document.getElementById("add")
+            let rem = document.getElementById(`choice_value${count - 1}`)
+            rem.remove()
+            count--;
+            console.log(count)
+            adding.disabled = false;
+        }
+        else {
+            del.disabled = true;
+
+        }
+    }
+
+    let poll_title = document.getElementById("title").value
+    function save_title() {
+        let poll_title = document.getElementById("title").value
+        console.log(poll_title)
+        poll_title_array.push(poll_title)
+        submit_title.disabled = true;
+        console.log(poll_title_array)
+        let store_title = localStorage.setItem("Title", poll_title)
+
+    }
+
+
+    let array = [choice1, choice2, choice3, choice4, choice5]
+    console.log(array)
+    function save_values() {
+        let poll_title = document.getElementById("title").value
+        let del = document.getElementById("delete")
+        let adding = document.getElementById("add")
+        console.log(count)
+        for (let i = 0; i < count; i++) {
+            console.log(`choice_value${i}`)
+            array[i] = document.getElementById(`choice_value${i}`).value;
+            console.log(array[i]);
+
+        }
+        console.log(array);
+        let store_choices = localStorage.setItem(poll_title, array)
+        add.disabled = true;
+        del.disabled = true;
+
+        document.getElementById("save_value").disabled = true;
+
+
+    }
+
+
+
+
+    function save_choice() {
+        let save_value = option_dropdown.value;
+
+
+        if (count === 0) {
+            console.log(count)
+            display_option(save_value)
+            count++;
+            submit_choice.disabled = true;
+            option_dropdown.disabled = true;
+
+        }
+
+    }
+
+
+    function creation_phase() {
+        console.log(array);
+
+        const creation = `./index.html`
+        window.location = creation
+        console.log(creation)
+
+    }
+
+
+</script>

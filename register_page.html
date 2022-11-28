@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="register"></div>
+</body>
+
+</html>
+<script>
+    let store_id = []
+    const register_id = document.getElementById("register")
+    const header_container = document.createElement("div");
+    header_container.className = "header_container"
+    register_id.appendChild(header_container)
+
+    const logo_div = document.createElement("div");
+    logo_div.className = "logo_div"
+
+    const logo_image = document.createElement("img");
+    logo_image.className = "logo_image"
+    logo_image.src = "https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV"
+
+    header_container.appendChild(logo_div)
+    logo_div.appendChild(logo_image)
+
+    const header_div = document.createElement("div")
+    header_div.className = "header_div"
+    const mailid_container = document.createElement("div")
+    mailid_container.className = "mail_container"
+    const mailid = document.createElement("input")
+    mailid.setAttribute("id", "mail")
+    mailid.type = "text"
+    mailid.placeholder = "Enter Your mail id"
+
+    const save_container = document.createElement("div")
+    save_container.className = "save_div"
+    const save_btn = document.createElement("button")
+    save_btn.className = "save_btn"
+    save_btn.innerHTML = "Register"
+    save_btn.onclick = voting_page
+
+    register_id.appendChild(header_div)
+    header_div.appendChild(mailid_container)
+    mailid_container.appendChild(mailid)
+    mailid_container.appendChild(save_container)
+    save_container.appendChild(save_btn)
+
+
+    let saveMail = localStorage.setItem("mailid", store_id)
+    let mail_data = localStorage.getItem("mailid")
+
+    function warning_popup() {
+        const modal_window = document.createElement("div")
+        modal_window.className = "modal_background"
+        const modal_content = document.createElement("div")
+        modal_content.className = "modal_content"
+        modal_content.innerHTML = "You have already voted,Thanks for your response"
+        register_id.appendChild(modal_window)
+        modal_window.appendChild(modal_content)
+    }
+
+
+    function voting_page() {
+        console.log(store_id)
+        let mail = document.getElementById("mail").value;
+        console.log(mail)
+        let voting_page = "./voting_page.html"
+        if (store_id.includes(mail) === false) {
+            store_id.push(mail)
+            console.log(store_id)
+            let saveMail = localStorage.setItem("mailid", store_id)
+            window.location = voting_page
+        }
+        else {
+            warning_popup()
+        }
+    }
+    console.log(store_id)
+
+</script>

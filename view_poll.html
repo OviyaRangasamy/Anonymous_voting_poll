@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="view"></div>
+
+</body>
+
+</html>
+<script>
+    const view_id = document.getElementById("view")
+ 
+
+    const view_header = document.createElement("div")
+    view_header.className = "header_container"
+    const view_page = document.createElement("div")
+    view_page.innerHTML = "view poll"
+    view_page.className = "create_header"
+
+    const logo_div = document.createElement("div");
+    logo_div.className = "logo_div"
+
+    const logo_image = document.createElement("img");
+    logo_image.className = "logo_image"
+    logo_image.src = "https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV"
+
+
+    const profile_container = document.createElement("div")
+    profile_container.className = "profile_container"
+
+    const admin_profile = document.createElement("button")
+    admin_profile.className = "admin_profile"
+    admin_profile.innerHTML = "Admin Profile"
+
+    view_id.appendChild(view_header)
+    view_header.appendChild(logo_div)
+    logo_div.appendChild(logo_image)
+    view_header.appendChild(view_page)
+    view_header.appendChild(profile_container)
+    profile_container.appendChild(admin_profile)
+
+    let title = localStorage.getItem("Title")
+    let choice_str = localStorage.getItem(title)
+    let tot = localStorage.getItem("Total")
+    let choice = choice_str.split(",")
+
+    
+
+    const ext_view_div = document.createElement("div")
+    ext_view_div.className = "ext_view"
+    const heading_container = document.createElement("div")
+    heading_container.className = "view_heading_container"
+    const heading_div = document.createElement("div")
+    heading_div.className = "view_heading"
+    heading_div.innerHTML = title;
+
+    const total_count = document.createElement("div")
+    total_count.className = "view_heading"
+    total_count.innerHTML = `total number of votes: ${tot}`
+
+    view_id.appendChild(ext_view_div)
+    ext_view_div.appendChild(heading_container)
+    heading_container.appendChild(heading_div)
+    heading_container.appendChild(total_count)
+
+    let getcount = 0
+    const vote_box = document.createElement("div")
+    vote_box.className = "vote_container"
+    for (let i of choice) {
+        console.log(i)
+        if (i !== "") {
+            console.log(typeof (i))
+            const vote_div = document.createElement("div")
+            vote_div.className = "vote_div"
+            const poll_choice_div = document.createElement("div")
+            poll_choice_div.className = "vote_count"
+            poll_choice_div.innerHTML = i
+            const vote_count = document.createElement("div")
+            vote_count.className = "vote_count"
+            getcount = localStorage.getItem(i)
+            vote_count.innerHTML = `VOTES: ${getcount}`
+            vote_box.appendChild(vote_div)
+            vote_div.appendChild(poll_choice_div)
+            vote_div.appendChild(vote_count)
+        }
+        else {
+            break
+        }
+
+    }
+
+    ext_view_div.appendChild(vote_box)
+
+    const end_container = document.createElement("div")
+    end_container.className = "save_div"
+    const end_poll = document.createElement("button")
+    end_poll.className = "end"
+    end_poll.innerHTML = "END"
+    end_poll.onclick = end;
+
+    function end(){
+        let home = "./index.html"
+        window.location = home
+
+    }
+
+    ext_view_div.appendChild(end_container)
+    end_container.appendChild(end_poll)
+
+</script>

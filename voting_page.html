@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="voting"></div>
+</body>
+
+</html>
+<script>
+
+    let title = localStorage.getItem("Title")
+    let choices = localStorage.getItem(title)
+    let count = 0
+    let total_count = 0
+
+    console.log(choices)
+    let options = choices.split(",")
+
+    console.log((options))
+    const voting_page = document.getElementById("voting")
+    const header_container = document.createElement("div");
+    header_container.className = "header_container"
+    voting_page.appendChild(header_container)
+
+    const logo_div = document.createElement("div");
+    logo_div.className = "logo_div"
+
+    const logo_image = document.createElement("img");
+    logo_image.className = "logo_image"
+    logo_image.src = "https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV"
+   
+header_container.appendChild(logo_div)
+logo_div.appendChild(logo_image)
+    const title_header_container = document.createElement("div")
+    title_header_container.className = "poll_container"
+    const title_header = document.createElement("div")
+    title_header.className = "poll_display"
+    title_header.innerHTML = title
+    voting_page.appendChild(title_header_container)
+    title_header_container.appendChild(title_header)
+
+    const vote_box = document.createElement("div")
+    vote_box.className = "vote_container"
+    voting_page.appendChild(vote_box)
+
+    for (let i of options) {
+        if (i !== "") {
+            const option_container = document.createElement("div")
+            option_container.className="vote_div"
+            const option_name = document.createElement("div")
+            option_name.className = "vote_count"
+            option_name.innerHTML = i
+            option_container.onclick = function () { confirm_vote(i) }
+            vote_box.appendChild(option_container)
+            option_container.appendChild(option_name)
+        }
+    }
+
+    function confirm_vote(option) {
+        const modal_window = document.createElement("div")
+        modal_window.className = "modal_background"
+        const modal_content = document.createElement("div")
+        modal_content.className = "modal_content"
+        modal_content.innerHTML = `Are you sure to vote for ${option}`;
+        let getcount = localStorage.getItem(option)
+        const confirm_button = document.createElement("button")
+        confirm_button.innerHTML = "vote"
+        confirm_button.className = "modal_vote"
+        confirm_button.onclick = function () { add_vote(option, getcount) };
+
+        const cross = document.createElement("div")
+        cross.innerHTML = "&times"
+        cross.className = "cross"
+        cross.onclick = function(){close()}
+        voting_page.appendChild(modal_window)
+        modal_window.appendChild(cross)
+        modal_window.appendChild(modal_content)
+        modal_content.appendChild(confirm_button)
+        function close(){
+        modal_window.style.display = "none";
+        }
+    }
+
+
+    function add_vote(i, count) {
+        count++;
+        total(tot);
+        let add_vote = localStorage.setItem(i, count);
+        let home = "./index.html"
+        window.location = home;
+
+    }
+    let tot = localStorage.getItem("Total")
+    function total(total_count){
+        total_count++;
+        let total_vote = localStorage.setItem("Total",total_count)
+        console.log(total_vote)
+    }
+</script>

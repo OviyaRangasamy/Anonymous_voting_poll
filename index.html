@@ -1,0 +1,90 @@
+<!-- Home Page-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Autonomous Voting Poll</title>
+</head>
+<body>
+    <div id = "Poll"></div>
+</body>
+</html>
+<script>
+
+    const voting = document.getElementById("Poll");
+    const header_container = document.createElement("div");
+    header_container.className = "header_container"
+    voting.appendChild(header_container)
+
+    const logo_div = document.createElement("div");
+    logo_div.className = "logo_div"
+
+    const logo_image = document.createElement("img");
+    logo_image.className = "logo_image"
+    logo_image.src = "https://play-lh.googleusercontent.com/3APi4HdWb0_rhnhAEoyJEYfSemXW9cNbA2VdOCSN7L6wgdjC_oTxLphER647R9PnSCkV"
+   
+    const sub_header = document.createElement("div");
+    sub_header.className = "sub_header"
+
+    const admin_btn = document.createElement("button")
+    admin_btn.className = "admin_btn"
+    admin_btn.innerHTML = "Admin"
+    admin_btn.onclick = admin_call;
+    
+    const voter_btn = document.createElement("button")
+    voter_btn.className = "admin_btn"
+    voter_btn.innerHTML = "Voter"
+    voter_btn.onclick = voter_call
+
+    sub_header.appendChild(admin_btn)
+    sub_header.appendChild(voter_btn)
+    logo_div.appendChild(logo_image)
+    header_container.appendChild(logo_div)
+    header_container.appendChild(sub_header)
+
+    const SignIn_container= document.createElement("div");
+    SignIn_container.className = "signin_container"
+
+    // const Mail_text = document.createElement("div");
+    // Mail_text.className = "mail_heading";
+    // Mail_text.innerHTML = "Enter email";
+    
+    const mail_container = document.createElement("div")
+    mail_container.className = "mail_container";
+
+    const password_container = document.createElement("div")
+    password_container.className = "password_container";
+
+
+    function admin_call(){
+        const admin_page_call = "./admin_page.html"
+        window.location = admin_page_call;
+    }
+
+    function voter_call(){
+        const voter_page_call = "./voter_page.html"
+        window.location = voter_page_call;
+    }
+
+
+
+
+
+
+
+    function Admin_signup(){
+
+    }
+
+    function Admin_signin(){
+
+    }
+
+    function Voter_login(){
+
+    }
+
+</script>
